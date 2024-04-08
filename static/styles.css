@@ -68,48 +68,6 @@ body {
     font-weight: bold;
   }
 
-  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-  div.container {
-    margin-left: 200px;
-    padding: 1px 16px;
-    height: max-content;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;  
-  }
-
-  .flex-item {
-    flex: 1 0 calc(50% - 40px); /* Set flex basis to 50%, minus margins */
-    margin: auto; /* Add some margin between items */
-    padding: 20px;
-    box-sizing: border-box; /* Include padding and border in the width calculation */
-    max-width: 400px;
-    min-width: 320px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 2%;
-  }
-  
-  /* Optional: Adjust styles for better visual appeal */
-  .flex-item a {
-    text-align: center;
-    text-decoration: none;
-    color: black;
-  }
-
-  .flex-item h2 {
-    text-align: center;
-  }
-  
-  .flex-item img {
-    display: block;
-    margin: 0 auto;
-    border: 4px solid black;
-    border-radius: 1%;
-    max-width: 100%; /* Ensure images don't exceed their container */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
   /* On screens that are less than 700px wide, make the sidebar into a topbar */
   @media screen and (max-width: 700px) {
     .sidebar {
@@ -118,7 +76,6 @@ body {
       position: relative;
     }
     .sidebar a {float: left;}
-    div.container {margin-left: 0;}
     .sidebar .secth {display: none;}
     .sidebar .contact {display: none;}
   }
@@ -133,22 +90,95 @@ body {
     .sidebar .contact {display: none;}
   }
 
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto; /* Auto margin to horizontally center the flex container */
+  margin-left: 200px;
+}
+
+.aside-1 { 
+  flex: 1 0 calc(50% - 40px);
+  max-width: 20%;
+}
+.aside-2 {
+  flex: 1 0 calc(50% - 40px);
+  max-width: 20%;
+}
+
+.flex-item {
+  flex: 1 0 calc(50% - 40px); /* Set flex basis to 50%, minus margins */
+  margin: auto; /* Add some margin between items */
+  padding: 20px;
+  box-sizing: border-box; /* Include padding and border in the width calculation */
+  max-width: 400px;
+  min-width: 320px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 2%;
+}
+
+/* Optional: Adjust styles for better visual appeal */
+.flex-item a {
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
+
+.flex-item h2 {
+  text-align: center;
+}
+
+.flex-item img {
+  display: block;
+  margin: 0 auto;
+  border: 2px solid black;
+  border-radius: 1%;
+  max-width: 100%; /* Ensure images don't exceed their container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
 /* format text */
-.header-container, #name-container {
+
+#intro-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto; /* Auto margin to horizontally center the flex container */
+  padding-top: 10%;
+  padding-bottom: 5%;
+}
+
+
+#name-container {
   margin: 20px;
   margin-top: 40px;
   margin-left: 240px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 2%;
 }
 
+.header-container {
+  margin: 20px;
+  margin-top: 40px;
+  margin-left: 240px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 2%;
+}
+
+#name-container h1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
 .text-container {
   margin: 20px;
-  margin-left: 240px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
   padding: 20px;
   border-radius: 2%;
 }
@@ -156,18 +186,37 @@ body {
 .header-container h1, .text-container p {
   text-align: left;
   margin: 0 auto;
-  max-width: 600px; /* Adjust this value as needed */
+  max-width: 400px; /* Adjust this value as needed */
 }
 
 @media screen and (max-width: 700px) {
   .header-container {
     margin-left: 40px;
   }
+  #name-container {
+    margin-left: 40px;
+  }
   .text-container {
     margin-left: 40px;
   }
+  .container {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
 }
 
-#about-container {
-  padding-top:  100px;
+@media all and (max-width: 1680px) {
+  .aside-1 {display: none;}
+  .aside-2 {display: none;}
+}
+
+@media all and (min-width: 1925px) {
+  .aside-1 {max-width: 24%;}
+  .aside-2 {max-width: 24%;}
+}
+
+
+@media all and (min-width: 2100px) {
+  .aside-1 {max-width: 27%;}
+  .aside-2 {max-width: 27%;}
 }
