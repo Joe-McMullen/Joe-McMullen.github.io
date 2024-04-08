@@ -85,7 +85,7 @@ body {
     padding: 20px;
     box-sizing: border-box; /* Include padding and border in the width calculation */
     max-width: 400px;
-    min-width: 200px;
+    min-width: 320px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 2%;
   }
@@ -135,7 +135,7 @@ body {
 
 
 /* format text */
-.header-container {
+.header-container, #name-container {
   margin: 20px;
   margin-top: 40px;
   margin-left: 240px;
@@ -145,7 +145,7 @@ body {
   border-radius: 2%;
 }
 
-.text-container{
+.text-container {
   margin: 20px;
   margin-left: 240px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -168,3 +168,6 @@ body {
   }
 }
 
+#about-container {
+  padding-top:  100px;
+}
