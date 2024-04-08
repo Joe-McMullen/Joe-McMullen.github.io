@@ -1,0 +1,170 @@
+body {
+    font-family: Arial, Helvetica, sans-serifS;
+}
+
+/* The side navigation menu */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Sidebar links */
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+  
+  /* Active/current link */
+  .sidebar a.active {
+    background-color: gray;
+    border-radius: 4px;
+    color: white;
+  }
+
+  /* Place contact links at the bottom of the sidebar */
+  .sidebar div.contact {
+  position: absolute;
+  bottom: 0;
+  width: 200px;
+  }
+
+  .sidebar .contact a {
+    display: block;
+    padding: 16px;
+    color: black;
+    text-decoration: none;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd; /* Optional: Add a separator between sidebar links and contact links */
+  }
+  
+  /* Links on mouse-over */
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    border-radius: 4px;
+    color: white;
+  }
+
+  /* Sidebar section headings */
+  .sidebar .secth {
+    margin-top: 40px;
+    margin-bottom: 0px;
+  }
+
+  #contact {
+    margin-top: 40px;
+    margin-bottom: 0px;
+  }
+
+  .sidebar span {
+    padding: 16px;
+    font-weight: bold;
+  }
+
+  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+  div.container {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: max-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;  
+  }
+
+  .flex-item {
+    flex: 1 0 calc(50% - 40px); /* Set flex basis to 50%, minus margins */
+    margin: auto; /* Add some margin between items */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    max-width: 400px;
+    min-width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 2%;
+  }
+  
+  /* Optional: Adjust styles for better visual appeal */
+  .flex-item a {
+    text-align: center;
+    text-decoration: none;
+    color: black;
+  }
+
+  .flex-item h2 {
+    text-align: center;
+  }
+  
+  .flex-item img {
+    display: block;
+    margin: 0 auto;
+    border: 4px solid black;
+    border-radius: 1%;
+    max-width: 100%; /* Ensure images don't exceed their container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* On screens that are less than 700px wide, make the sidebar into a topbar */
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.container {margin-left: 0;}
+    .sidebar .secth {display: none;}
+    .sidebar .contact {display: none;}
+  }
+  
+  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+    .sidebar .secth {display: none;}
+    .sidebar .contact {display: none;}
+  }
+
+
+/* format text */
+.header-container {
+  margin: 20px;
+  margin-top: 40px;
+  margin-left: 240px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 2%;
+}
+
+.text-container{
+  margin: 20px;
+  margin-left: 240px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 2%;
+}
+
+.header-container h1, .text-container p {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 600px; /* Adjust this value as needed */
+}
+
+@media screen and (max-width: 700px) {
+  .header-container {
+    margin-left: 40px;
+  }
+  .text-container {
+    margin-left: 40px;
+  }
+}
+
