@@ -10,18 +10,18 @@
     <!-- The sidebar -->
     <div class="sidebar">
         <a class="active" href="index.html">About</a>
-        <div class="secth">
-            <span>Projects</span>
+        <div class="sect-header">
+            <h3>Projects</h3>
         </div>
         <a href="./templates/elo.html">xG ELO<N/a>
         <a href="./templates/networks.html">xT Pass Networks</a>
         <a href="dashboard.html">Statsbomb Dashboard</a>
         <a href="clustering.html">Recruitment Clustering</a>
-        <div id="contact" class="secth">
-            <span>Contact</span>
+        <div id="contact-div" class="sect-header">
+            <h3>Contact</h3>
+            <a class="contact" href="https://www.linkedin.com/in/joe-mcmullen-a77a6913b/">LinkedIn</a>
+            <a class="contact" href="https://www.github.com/Joe-McMullen">Github</a>
         </div>
-        <a class="contact" href="https://www.linkedin.com/in/joe-mcmullen-a77a6913b/">LinkedIn</a>
-        <a class="contact" href="https://www.github.com/Joe-McMullen">Github</a>
     </div>
 
     <!-- Content-->
@@ -30,10 +30,12 @@
             <h1>Joe</h1>
             <h1>McMullen</h1>
         </div>
-        <div class="text-container">
+        <div class="about-text-container">
             <p>
-                Data scientist focussed on applications in football analytics. 
-                Masters degree in Chemical Engineering and a Postgraduate degree in Sports Analytics in collaboration with FC Barcelona.
+                Data scientist focussed on football
+            </p>
+            <p>
+                Postgraduate degree in Sports Analytics from UPC and FC Barcelona
             </p>
         </div>
     </div>
@@ -41,27 +43,36 @@
     <div class="header-container">
         <h1>Projects</h1>
     </div>
-    <div class="container">
-        <div class="aside-1"></div>
-        <div class="flex-item">
-            <h2><a href="./templates/elo.html">xG-based Elo Rankings</a></h2>
-            <img src="./img/epl_line.png" alt="line chart">
-        </div>
-        <div class="flex-item">
-            <h2><a href="networks.html">xT-weighted Pass Networks</a></h2>
-            <img src="./img/barca_xt.png" alt="pass network">
-        </div>
-        <div class="aside-2"></div>
-        <div class="aside-1"></div>
-        <div class="flex-item">
-            <h2><a href="report.html">Statsbomb Match Dashboard</a></h2>
-            <img src="./img/momentum.PNG" alt="football dashboard">
-        </div>
-        <div class="flex-item">
-            <h2><a href="clustering.html">Clustering Player Similarity</a></h2>
-            <img src="./img/clustering.png" alt="scatterplot">
-        </div>
-        <div class="aside-2"></div>
+
+    <div class="img-container">
+        <a href="./templates/elo.html">
+            <div class="img-div" href >
+                <h2>xG-based Elo Rankings</h2>
+                <img src="./img/epl_line.png" alt="line chart">
+            </div>
+        </a>
+        <a href="./templates/networks.html">
+            <div class="img-div">
+                <h2>xT-weighted Pass Networks</h2>
+                <img src="./img/barca_xt.png" alt="pass network">
+            </div>
+        </a>
     </div>
+
+    <div class="img-container">
+        <a href="./templates/dashboard.html">
+            <div class="img-div">
+                <h2>Statsbomb Match Dashboard</h2>
+                <img src="./img/momentum.PNG" alt="football dashboard">
+            </div>
+        </a>
+        <a href="./templates/clustering.html">
+            <div class="img-div">
+                <h2>Clustering Player Similarity</h2>
+                <img src="./img/clustering.png" alt="scatterplot">
+            </div>
+        </a>
+    </div>
+
 </body>
 </html>
