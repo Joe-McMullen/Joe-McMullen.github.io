@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>xT Networks</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+    <!-- The sidebar -->
+    <div class="sidebar">
+        <a href="../index.html">About</a>
+        <div class="sect-header">
+            <h3>Projects</h3>
+        </div>
+        <a href="elo.html">xG ELO<N/a>
+        <a class="active" href="networks.html">xT Pass Networks</a>
+        <a href="dashboard.html">Statsbomb Dashboard</a>
+        <a href="clustering.html">Recruitment Clustering</a>
+        <div id="contact-div" class="sect-header">
+            <h3>Contact</h3>
+            <a class="contact" href="https://www.linkedin.com/in/joe-mcmullen-a77a6913b/">LinkedIn</a>
+            <a class="contact" href="https://www.github.com/Joe-McMullen">Github</a>
+        </div>
+    </div>
+
+    <!-- Content-->
+    <div class="title-container">
+        <h1>Football Passing Networks Weighted with Expected Threat</h1>
+    </div>
+    <div class="subtitle-container">
+        <div class="subtitle-div">
+            <h2>Combining advanced metrics and network science approaches to gain insight into team performance and player roles</h2>
+        </div>
+    </div>
+    <div class="stack-container">
+        <div class="stack-div">
+            <h3>Stack: Python, Flask, SQL, HTML</h3>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                This project aims to provide strength rankings for football teams in the EPL, LaLiga, Serie A and Bundesliga using a modified ELO algorithm and the expected goals(xG) metric.
+                xG is a statistical method of quantifying a team's chance creation by calculating the probability that a shot results in a goal (from the moment before the shot is taken). Teams which produce better chances than expected or concede fewer chances than expected will increase in rating after each game. The goal of this ranking is to provide a more accurate measure of team strength at a given time than league table position or expected points(xPts) table position. The league table only reflects goals scored which are more sparse than shots, and xPts does not reflect the strength of teams faced. The interactive visualisation below (produced using altair in python) shows how each team in the premier league's overall strength has changed over the course of the 2023/24 season. The data used in this project comes from
+                <a style="color: black;" href="https://understat.com">Understat</a>
+            </p>
+            <p class="note">
+                *updated as of 9/4/24 (please view on laptop or desktop)
+            </p>
+        </div>
+    </div>

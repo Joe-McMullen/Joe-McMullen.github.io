@@ -3,6 +3,7 @@ body {
 }
 body p {
   font-family: Arial, Helvetica, sans-serif;
+  text-align: justify;
 }
 
 /* The side navigation menu */
@@ -72,7 +73,7 @@ body p {
   }
 }
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-@media screen and (max-width: 400px) {
+@media all and (max-width: 400px) {
   .sidebar a {
     text-align: center;
     float: none;
@@ -134,11 +135,12 @@ body p {
   max-width: 300px;
   align-items: center;
 }
-#intro-container .about-text-container p {
+#intro-container .about-text-container .about-text {
   font-size: 24px;
   font-weight: bold;
   padding: 0px;
   margin: 0px;
+  text-align: left;
 }
 
 .header-container {
@@ -249,6 +251,7 @@ body p {
 .text-container .text-div {
   flex: 0.8;
   max-width: 1000px;
+  text-justify: auto;
 }
 .text-container .text-div p {
   padding: 0 20px;
@@ -305,7 +308,7 @@ body p {
   position: relative;
 }
 
-@media screen and (max-width: 1800px) {
+@media all and (max-width: 1800px) {
   .viz-container {
     display: none;
   }
@@ -335,8 +338,8 @@ body p {
 @media all and (max-width: 700px) {
   .header-container, #intro-container, .text-container, .img-container, .title-container, .subtitle-container, .stack-container,
   .text-heading-container, .equation-container, .text-img-container, .table-container {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
   }
 }
 
