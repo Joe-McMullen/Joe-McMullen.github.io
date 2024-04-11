@@ -1,6 +1,9 @@
 body {
   font-family: Arial, Helvetica, sans-serifS;
 }
+body p {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 /* The side navigation menu */
 .sidebar {
@@ -238,7 +241,7 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 0px;
   color: black;
   margin-left: 200px;
@@ -265,7 +268,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 0px;
   color: black;
   margin-left: 200px;
@@ -330,39 +333,10 @@ body {
 }
 
 @media all and (max-width: 700px) {
-  .header-container {
-    margin-left: 20px;
-  }
-  #intro-container {
-    margin-left: 20px;
-  }
-  .text-container {
-    margin-left: 20px;
-  }
-  .img-container {
+  .header-container, #intro-container, .text-container, .img-container, .title-container, .subtitle-container, .stack-container,
+  .text-heading-container, .equation-container, .text-img-container, .table-container {
     margin-left: 20px;
     margin-right: 20px;
-  }
-  .title-container {
-    margin-left: 20px;
-  }
-  .subtitle-container {
-    margin-left: 20px;
-  }
-  .stack-container {
-    margin-left: 20px;
-  }
-  .text-heading-container {
-    margin-left: 20px;
-  }
-  .equation-container {
-    margin-left: 20px;
-  }
-  .text-img-container {
-    margin-left: 20px;
-  }
-  .table-container {
-    margin-left: 20px;
   }
 }
 
