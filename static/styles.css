@@ -249,7 +249,7 @@ body p {
   margin-left: 200px;
 }
 .text-container .text-div {
-  flex: 0.8;
+  flex: 0.9;
   max-width: 1000px;
   text-justify: auto;
 }

@@ -41,18 +41,57 @@
     </div>
     <div class="stack-container">
         <div class="stack-div">
-            <h3>Stack: Python, Flask, SQL, HTML</h3>
+            <h3>Stack: Python, Networkx, MongoDB</h3>
         </div>
     </div>
     <div class="text-container">
         <div class="text-div">
             <p>
-                This project aims to provide strength rankings for football teams in the EPL, LaLiga, Serie A and Bundesliga using a modified ELO algorithm and the expected goals(xG) metric.
-                xG is a statistical method of quantifying a team's chance creation by calculating the probability that a shot results in a goal (from the moment before the shot is taken). Teams which produce better chances than expected or concede fewer chances than expected will increase in rating after each game. The goal of this ranking is to provide a more accurate measure of team strength at a given time than league table position or expected points(xPts) table position. The league table only reflects goals scored which are more sparse than shots, and xPts does not reflect the strength of teams faced. The interactive visualisation below (produced using altair in python) shows how each team in the premier league's overall strength has changed over the course of the 2023/24 season. The data used in this project comes from
-                <a style="color: black;" href="https://understat.com">Understat</a>
+                This project aims to develop an Expected Threat(xT) model and use the xT of passes as weights in a team's passing network
+                to gain insight into the influence of players to attacking phases of team's play. xT is a statistical model which estimates 
+                the likelihood of scoring within the current posession based on location on the pitch. Using this, events which move the ball
+                such as passes or dribbles can be given a value based on the increase in likelihood of scoring between the location where the 
+                event started and finished.
             </p>
-            <p class="note">
-                *updated as of 9/4/24 (please view on laptop or desktop)
+            <p>
+                Passing networks (pictured below) can be used to gain insight into the connections and structure of a team when in possession.
+                Traditionally a football passing network considers the players of a team as nodes located in the average position of their passes made.
+                The connections(edges) between two players represent the volume of passes between them. This project instead considers the xT created by passes
+                between players as the edges to determine which combinations are most important to advancing the ball into more dangerous positions.
+                Using network measures, the pass networks produced can be analysed to assess team performance and player role within the team system.
+            </p>
+        </div>
+    </div>
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Approach</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                The expected threat algorithm used in this project follows the implementation of <a href="https://karun.in/blog/expected-threat.html">Karun Singh</a>
+                of Karun Singh who's work is based on Sarah Rudd's <a href="https://nessis.org/nessis11/rudd.pdf">research</a> first describing football
+                in terms of a markov model. The pitch is broken down into (16 x 12) tiles and in each tile, there is the possibility to shoot,
+                pass, or dribble (pass and dribble will be grouped as "move" actions herein).  
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                The reward for shooting in a given tile is the ratio of goals scored to the number of shots taken in that tile (as in a simple expected goals(xG) model).   
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                In Sarah Rudd's implementation, the value of moving to a tile is achieved at the convergence of the transition matrix of
+                the markov chain model. The model implemented here does not feature an absorption state in the form of possession being lost.
+                Only successful actions are considered. As a result, if left to run until convergence, each tile move reward will rise to that
+                of the average shot value giving us a poor model. For this reason, the model was iterated 5 times. This gives the probability that
+                from a given location, a goal will be scored within 5 successful events.
             </p>
         </div>
     </div>
