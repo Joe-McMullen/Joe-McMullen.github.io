@@ -1,78 +1,86 @@
 body {
-    font-family: Arial, Helvetica, sans-serifS;
+  font-family: Arial, Helvetica, sans-serifS;
 }
 
 /* The side navigation menu */
 .sidebar {
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    a, div a {
-      display: block;
-      color: black;
-      padding: 16px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 15px;
-    }
-    a.active {
-      background-color: gray;
-      border-radius: 4px;
-      color: white;
-    }
-    .sect-header {
-      padding-top: 60px;
-      margin: 0px;
-    }
-    #contact-div {
-      position: absolute;
-      bottom: 0px;
-      width: 100%;
-      padding-bottom: 10px;
-    }
-    h3 {
-      font-size: 16px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid gray;
-      margin-bottom: 0px;
-    }
-  }
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.sidebar a, .sidebar div a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+}
+.sidebar a.active {
+  background-color: gray;
+  border-radius: 4px;
+  color: white;
+}
+.sidebar .sect-header {
+  padding-top: 60px;
+  margin: 0px;
+}
+.sidebar #contact-div {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  padding-bottom: 10px;
+}
+.sidebar h3 {
+  font-size: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+  margin-bottom: 0px;
+}
 
-  /* Links on mouse-over */
-  .sidebar a:hover:not(.active) {
-    background-color: #555;
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
-  }
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+}
 
-  /* On screens that are less than 700px wide, make the sidebar into a topbar */
-  @media screen and (max-width: 700px) {
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-    }
-    .sidebar a {float: left;}
-    .sidebar .sect-header {display: none;}
-    .sidebar .contact {display: none;}
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media all and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
   }
-  
-  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-  @media screen and (max-width: 400px) {
-    .sidebar a {
-      text-align: center;
-      float: none;
-    }
-    .sidebar .secth {display: none;}
-    .sidebar .contact {display: none;}
+  .sidebar a {
+    float: left;
   }
-
+  .sidebar .sect-header {
+    display: none;
+  }
+  .sidebar .contact {
+    display: none;
+  }
+}
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+  .sidebar .secth {
+    display: none;
+  }
+  .sidebar .contact {
+    display: none;
+  }
+}
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 .img-container {
   display: flex;
@@ -82,26 +90,25 @@ body {
   margin-left: 200px;
   padding-top: 40px;
   padding-bottom: 40px;
-  a {
-    text-decoration: none;
-  }
-  .img-div {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 2%;
-    padding: 20px;
-    h2 {
-      color: black;
-    }
-    img {
-      border: 2px solid black;
-      max-width: 400px;
-      min-width: 320px;
-    }
-  }
+}
+.img-container a {
+  text-decoration: none;
+}
+.img-container .img-div {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 2%;
+  padding: 20px;
+}
+.img-container .img-div h2 {
+  color: black;
+}
+.img-container .img-div img {
+  border: 2px solid black;
+  max-width: 400px;
+  min-width: 320px;
 }
 
 /* format text */
-
 #intro-container {
   display: flex;
   flex-wrap: wrap;
@@ -110,25 +117,25 @@ body {
   padding-top: 10%;
   padding-bottom: 5%;
   margin-left: 200px;
-  #name-container {
-    text-align: left;
-    h1 {
-      font-size: 64px;
-      font-weight: bolder;
-      padding: 0px;
-      margin: 0px;
-    }
-  }
-  .about-text-container {
-    max-width: 300px;
-    align-items: center;
-    p {
-      font-size: 24px;
-      font-weight: bold;
-      padding: 0px;
-      margin: 0px;
-    }
-  }
+}
+#intro-container #name-container {
+  text-align: left;
+}
+#intro-container #name-container h1 {
+  font-size: 64px;
+  font-weight: bolder;
+  padding: 0px;
+  margin: 0px;
+}
+#intro-container .about-text-container {
+  max-width: 300px;
+  align-items: center;
+}
+#intro-container .about-text-container p {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0px;
 }
 
 .header-container {
@@ -136,9 +143,9 @@ body {
   justify-content: center;
   margin-left: 200px;
   padding-top: 80px;
-  h1 {
-    border-bottom: 2px solid black;
-  }
+}
+.header-container h1 {
+  border-bottom: 2px solid black;
 }
 
 /* formatting for projects */
@@ -155,15 +162,15 @@ body {
   padding-bottom: 0px;
   color: rgb(94, 94, 94);
   margin-left: 200px;
-  .subtitle-div {
-    flex: 0.8;
-    border-bottom: 1px solid darkgray;
-    h2 { 
-      text-align: center;
-      padding: 0 20px;
-      font-weight: normal; 
-    }
-  }
+}
+.subtitle-container .subtitle-div {
+  flex: 0.8;
+  border-bottom: 1px solid darkgray;
+}
+.subtitle-container .subtitle-div h2 {
+  text-align: center;
+  padding: 0 20px;
+  font-weight: normal;
 }
 
 .stack-container {
@@ -173,15 +180,15 @@ body {
   padding-bottom: 0px;
   color: rgb(94, 94, 94);
   margin-left: 200px;
-  .stack-div {
-    flex: 0.8;
-    border-bottom: 1px solid darkgray;
-    h3 { 
-      text-align: right;
-      padding: 0px;
-      font-weight: normal; 
-    }
-  }
+}
+.stack-container .stack-div {
+  flex: 0.8;
+  border-bottom: 1px solid darkgray;
+}
+.stack-container .stack-div h3 {
+  text-align: right;
+  padding: 0px;
+  font-weight: normal;
 }
 
 .text-heading-container {
@@ -191,16 +198,16 @@ body {
   padding-bottom: 0px;
   color: rgb(94, 94, 94);
   margin-left: 200px;
-  .text-heading-div {
-    flex: 0.8;
-    border-bottom: 1px solid darkgray;
-    max-width: 1000px;
-    h2 { 
-      text-align: left;
-      padding: 0 20px;
-      font-weight: normal; 
-    }
-  }
+}
+.text-heading-container .text-heading-div {
+  flex: 0.8;
+  border-bottom: 1px solid darkgray;
+  max-width: 1000px;
+}
+.text-heading-container .text-heading-div h2 {
+  text-align: left;
+  padding: 0 20px;
+  font-weight: normal;
 }
 
 .text-img-container {
@@ -209,22 +216,22 @@ body {
   padding-top: 60px;
   padding-bottom: 0px;
   margin-left: 200px;
-  .text-img-div {
-    flex: 0.8;
-    text-align: center;
-    max-width: 1000px;
-    img {
-      width: 100%;
-      max-width: 960px;
-      min-width: 320px;
-      object-fit: contain;
-    }
-    .note {
-      font-style: italic;
-      font-size: 12;
-      text-align: left;
-    }
-  }
+}
+.text-img-container .text-img-div {
+  flex: 0.8;
+  text-align: center;
+  max-width: 1000px;
+}
+.text-img-container .text-img-div img {
+  width: 100%;
+  max-width: 960px;
+  min-width: 320px;
+  object-fit: contain;
+}
+.text-img-container .text-img-div .note {
+  font-style: italic;
+  font-size: 12;
+  text-align: left;
 }
 
 .text-container {
@@ -235,23 +242,23 @@ body {
   padding-bottom: 0px;
   color: black;
   margin-left: 200px;
-  .text-div {
-    flex: 0.8;
-    max-width: 1000px;
-    p { 
-      padding: 0 20px;
-      font-weight: normal;
-      font-display: block;
-    }
-    .note {
-      font-style: italic;
-      font-size: 12;
-      text-align: left;
-    }
-    ul {
-      text-align: left;
-    }
-  }
+}
+.text-container .text-div {
+  flex: 0.8;
+  max-width: 1000px;
+}
+.text-container .text-div p {
+  padding: 0 20px;
+  font-weight: normal;
+  font-display: block;
+}
+.text-container .text-div .note {
+  font-style: italic;
+  font-size: 12;
+  text-align: left;
+}
+.text-container .text-div ul {
+  text-align: left;
 }
 
 .table-container {
@@ -263,24 +270,20 @@ body {
   color: black;
   margin-left: 200px;
   gap: 40px;
-  .table-div {
-    table {
-      font-size: 16px;
-      border: 1px solid gray;
-      border-collapse: collapse;
-      border-radius: 2%;
-      tr {
-        th, td {
-          padding: 4px;
-          border: 1px solid gray;
-        }
-        td {
-          padding-right: 10px;
-          text-align: right;
-        }
-      }
-    }
-  }
+}
+.table-container .table-div table {
+  font-size: 16px;
+  border: 1px solid gray;
+  border-collapse: collapse;
+  border-radius: 2%;
+}
+.table-container .table-div table tr th, .table-container .table-div table tr td {
+  padding: 4px;
+  border: 1px solid gray;
+}
+.table-container .table-div table tr td {
+  padding-right: 10px;
+  text-align: right;
 }
 
 .viz-container {
@@ -289,46 +292,44 @@ body {
   margin-left: 200px;
   padding-top: 20px;
   /* styles for viz */
-  #vis.vega-embed {
-    width: auto;
-    display: flex;
-  }
-
-  #vis.vega-embed details,
-  #vis.vega-embed details summary {
-    position: relative;
-  }
 }
+.viz-container #vis.vega-embed {
+  width: auto;
+  display: flex;
+}
+.viz-container #vis.vega-embed details,
+.viz-container #vis.vega-embed details summary {
+  position: relative;
+}
+
 @media screen and (max-width: 1800px) {
   .viz-container {
     display: none;
   }
 }
-
 .equation-container {
   display: flex;
   justify-content: center;
   margin-left: 200px;
-  .equation {
-    text-align: center;
-    font-size: 20px;
-  }
-  .explanation {
-    text-align: left;
-    margin-bottom: 0px;
-    font-size: 16px;
-  }
-  ul {
-    margin-top: 0px;
-  }
 }
+.equation-container .equation {
+  text-align: center;
+  font-size: 20px;
+}
+.equation-container .explanation {
+  text-align: left;
+  margin-bottom: 0px;
+  font-size: 16px;
+}
+.equation-container ul {
+  margin-top: 0px;
+}
+
 .exp-text {
   font-size: 16px;
 }
 
-
-
-@media screen and (max-width: 700px) {
+@media all and (max-width: 700px) {
   .header-container {
     margin-left: 20px;
   }
@@ -342,7 +343,7 @@ body {
     margin-left: 20px;
     margin-right: 20px;
   }
-  .title-container{
+  .title-container {
     margin-left: 20px;
   }
   .subtitle-container {
@@ -365,4 +366,4 @@ body {
   }
 }
 
-
+/*# sourceMappingURL=styles.css.map */
