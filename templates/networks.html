@@ -56,24 +56,45 @@
             <p>
                 Passing networks (pictured below) can be used to gain insight into the connections and structure of a team when in possession.
                 Traditionally a football passing network considers the players of a team as nodes located in the average position of their passes made.
-                The connections(edges) between two players represent the volume of passes between them. This project instead considers the xT created by passes
+                The connections(edges) between two players represent the volume of passes between them. This project extends the use of networks in football
+                by considering the xT created by passes
                 between players as the edges to determine which combinations are most important to advancing the ball into more dangerous positions.
                 Using network measures, the pass networks produced can be analysed to assess team performance and player role within the team system.
+            </p>
+            <p>
+                This project, co-authored by <a href="https://github.com/lihongji98">Lihong Ji</a>, used event data from 192 games of the 2023/24 LaLiga
+                season provided by StatsPerform and was presented as the final project in my postgraduate in sports analytics at Universitat Politècnica de Catalunya
+                in collaboration with FC Barcelona. The repository and full report for the project is available <a href="https://github.com/lihongji98/PassingNetwork">here</a>.
             </p>
         </div>
     </div>
     <div class="text-heading-container">
         <div class="text-heading-div">
-            <h2>Approach</h2>
+            <h2>Approach - Expected Threat</h2>
         </div>
     </div>
     <div class="text-container">
         <div class="text-div">
             <p>
                 The expected threat algorithm used in this project follows the implementation of <a href="https://karun.in/blog/expected-threat.html">Karun Singh</a>
-                of Karun Singh who's work is based on Sarah Rudd's <a href="https://nessis.org/nessis11/rudd.pdf">research</a> first describing football
+                who's work is based on <a href="https://nessis.org/nessis11/rudd.pdf">Sarah Rudd's research</a> describing football
                 in terms of a markov model. The pitch is broken down into (16 x 12) tiles and in each tile, there is the possibility to shoot,
-                pass, or dribble (pass and dribble will be grouped as "move" actions herein).  
+                pass, or dribble (pass and dribble will be grouped as "move" actions herein). To calculate an xT value for each tile, we need to know the probability
+                that an action occurs at a tile and the reward for the action.
+            </p>
+        </div>
+    </div>
+    <div class="equation-container">
+        <div class="equation-div">
+            <p class="equation">
+                \( Action \in
+                \begin{cases}
+                shot\\
+                move (pass \ or \ dribble)
+                \end{cases} \)
+            </p>
+            <p class="equation">
+                \( xT_{x,y} = P_{shot_{x,y}} \times R_{shot_{x,y}} +  P_{move_{x,y}} \times R_{move_{x,y}} \)
             </p>
         </div>
     </div>
@@ -84,14 +105,363 @@
             </p>
         </div>
     </div>
+    <div class="equation-container">
+        <div class="equation-div">
+            <p class="equation">
+                \( R_{shot_{x,y}} = P({goal_{x,y} \ | \ Action_{x,y} = shot}) \)
+            </p>
+        </div>
+    </div>
     <div class="text-container">
         <div class="text-div">
             <p>
-                In Sarah Rudd's implementation, the value of moving to a tile is achieved at the convergence of the transition matrix of
-                the markov chain model. The model implemented here does not feature an absorption state in the form of possession being lost.
-                Only successful actions are considered. As a result, if left to run until convergence, each tile move reward will rise to that
-                of the average shot value giving us a poor model. For this reason, the model was iterated 5 times. This gives the probability that
-                from a given location, a goal will be scored within 5 successful events.
+                To calculate the reward for moving in a given tile, we need to consider the probability of moving from any tile to any other. This is the transition 
+                matrix for the model \( T \). We can then simulate a number of actions into the future to determine the probabilities of
+                future scenarios. The reward for moving in a tile is the percentage of these simulations which orginate in the selected tile and move to another, ultimately ending in a goal. 
+                Karun's original implementation only considers successful actions and to account for this, the number of iterations in the simulation he proposes is relatively low
+                at 4 or 5.
             </p>
+        </div>
+    </div>
+    <div class="equation-container">
+        <div class="equation-div">
+            <p class="equation">
+                \( R_{move_{x,y}} = \sum_{z=1}^{16}\sum_{w=1}^{12} P(T_{(x,y)\to(z,w)} \ | \ Action_{x,y} = move) \cdot xT_{z,w}  \)
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Finally, this gives a model which provides the likelihood that possession in a tile will culminate in a 
+                goal. Below you can see the model results for the first half of the 2023/24 LaLiga season. As expected, areas close to the opposing
+                goal have high threat values due to the high chance to shoot and score in directly in these tiles. However areas close to the opposing
+                goal line also have relatively high threat values even though it is unlikely to shoot in these areas. This is due to the high likelihood
+                of moving to those threatening central areas. In general, threat value of a tile increases exponentially as you approach the opposing team's
+                goal.
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="season-xt" class="text-img-div">
+            <img src="../img/seasonal_xT.png" alt="expected threat chart">
+        </div>
+    </div>
+
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Approach - Pass Networks</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                To produce pass networks for a team in a given game, we consider the longest time period during which a team did not make any substitions.
+                We then need the passer and receiver for all passes that occured during the period to create a pass matrix as seen below where matrix entries tell us the volume 
+                of passes between players.
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="liv-matrix" class="text-img-div">
+            <img src="../img/pass_matrix.PNG" alt="pass network">
+            <p class="matrix-note">
+                Pass matrix of Liverpool 2020 UCL final from 
+                <a href="https://footballdata.wyscout.com/wp-content/uploads/2020/05/Match-Report-UCLFinal_compressed.pdf">Wyscout</a>
+                (matrix entries give count of passes. y-axis is player as passer. x-axis is player as receiver)
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                As indicated in the pass matrix, this is a directed network so information on who is the passer and receiver is retained.
+                The nodes are the average location of pass originations for each player. As seen in the example below  
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="guardiola-network" class="text-img-div">
+            <img src="../img/guardiola_pass_net.PNG" alt="pass network">
+            <p class="matrix-note">
+                Pass network of Guardion's Barcelona from 
+                <a href="https://www.nature.com/articles/s41598-019-49969-2">Javier Buldú et al.</a>
+                (edge width is proportional to pass count, node diameter is proportional to eigenvector centrality (discussed below))
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                When creating pass networks weighted with xT. We only consider the passes that have positive contributions to xT as we 
+                wanted to focus on attacking phases as shown by the edge calculation step below where \( \omega \) is the edge from node \( A \) to node \( B \)
+                This means we lose information on some negative xT actions. Hopefully, this can be considered
+                in future work.
+            </p>
+        </div>
+    </div>
+    <div class="equation-container">
+        <div class="equation-div">
+            <p class="equation">
+                \( \omega_{{A \to B}} = \sum_{i}^{\#pass} max(0, xT_{A \to B}^i)  \)
+            </p>
+        </div>
+    </div>
+
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Approach - Eigenvalue Centrality</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Being able to construct pass networks and xT networks, we would like to analyse these networks to understand which players 
+                are most important to the structure of a team in posession.
+                Eigenvalue centrality(EC) is a network measure that gives the transitive importance of a node to the network. If considering
+                a network of links such as the internet (pictured below), we can say a web page is important to the network if it is linked to by many other
+                important pages. Google used this approach in their <a href="">PageRank</a> search engine algorithm.
+                Web pages with more links from more important web pages are presented to users first. 
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="web" class="text-img-div">
+            <img src="../img/web.png" alt="web network">
+            <p class="matrix-note">Network of part of the world wide web from Melanie Mitchell's "Complexity", 2009</p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                In a directed network such as a pass network, this means we can consider two values for EC, one with the players
+                as receivers using the pass matrix as shown above. We can also use the transpose of this matrix to find the 
+                importance of players to the network as passers. To calculate the EC, we find the eigenvector of the pass matrix with 
+                the largest positive eigenvalue.
+            </p>
+        </div>
+    </div>
+    <div class="equation-container">
+        <div class="equation-div">
+            <p class="equation">
+                \( EC(i) = \frac{1}{\lambda} \times \sum_{j=1}^{N} A_{ij} \times x_{j} \)
+            </p>
+            <p class="explanation">
+                <span>Where:</span>
+                <ul>
+                    <li class="exp-text">\(\lambda\) is the largest positive eigenvalue</li>
+                    <li class="exp-text">\(A\) is the pass matrix</li>
+                    <li class="exp-text">\(x\) is the eigenvector corresponding to the largest eigenvalue \(\lambda\) </li>
+                </ul>
+            </p>
+        </div>
+    </div>
+    
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Results</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+               Whilst we can produce an xT model over all of the data as seen above to get an average estimate for the threat value of each tile,
+               we can also produce xT models for individual teams to gain insight into how their attacking profiles may differ. In the figure below,
+               we can see the differences between the top 4 teams in the league (as of 15/4/24). Real Madrid (top right) have a high expected threat
+               focused centrally in the penalty area whilst Atletico Madrid have a wider and more shallow profile of high
+               xT zones indicating chances were created/scored from closer to the opposing goal line. Barcelona (top left) and
+               Girona (bottom right) have more varied profiles indicating chances were created in more varied patterns.
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="teams-xt" class="text-img-div">
+            <img src="../img/teams_xT.png" alt="Threat graphs">
+            <p class="note">Threat profiles for different teams for the first half of the 2023/24 LaLiga season. 
+                Top-left: Barcelona, Top-right: Real Madrid, Bottom-left: Athletico Madrid, Bottom-right: Girona. 
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Understanding where a team creates threat from gives us an idea of the attacking patterns that are most effective for them, with 
+                implications for coaches and analysts. For example, a coach may want to reinforce the effective patterns and getting the ball
+                to the high threat zones, whilst an opposition analyst may highlight these higher threat zones as key areas to defend. However, to what extent
+                these findings are reliable is hard to judge given that they are reliant on a relatively small sample of goal events and the dynamic nature
+                of football means that a team's tactics are always prone to change. As a result, it may be prudent to also consider the insights gained from 
+                pass networks weighted with xT.
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Consider Barcelona's structure against Sevilla on 23/9/23 which resulted in a 1-0 win for Barcelona.
+                  
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="barca-pass" class="text-img-div">
+            <img src="../img/barca_pass.png" alt="pass network">
+            <p class="matrix-note">Barcelona pass network </p>
+            <p class="matrix-note">(Edge width encode to pass count, node diameter encodes total pass involvement)</p>
+        </div>
+        <div id="barca-xt" class="text-img-div">
+            <img src="../img/barca_xt.png" alt="pass network">
+            <p class="matrix-note">Barcelona xT network</p>
+            <p class="matrix-note">(Edge width encodes accumulation of to positive xT, node diameter encodes total positive xT accumulation)</p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Comparison of the two shows the forward players tend to be more influential in their contribution to the attaking network
+                than the count network, the fewer passes they are involved in create more threat. This is due to the areas in which they play having a steeper gradient
+                on the xT profile. We can see that Barcelona are quite homogenous in the way they attack, with many players having an even share
+                of xT involvement. We can also see that no. 15 (Christensen) is important to the pass network but less important to the xT network. 
+                This suggests he circulates in build-up phases but is not important to attacking play. No. 9 (Lewandowski) is the opposite, being involved in few 
+                passes but more threatening passages of play.
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                As previously discussed, we want to use these networks to better understand a players role in the passing structure of the team.
+                For the 192 games in the dataset, the average EC of players with more than 200 minutes was calculated as both passers and receivers.  
+                Player importance as a passer vs as a reciever in the pass matrix can be seen below.
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="pass-ec" class="text-img-div">
+            <img src="../img/_in_out_pass_ec.png" alt="scatter plot">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Goalkeepers (green) had lower relative importance
+                to the network and were more important to passing than receiving, indicating they are often originators
+                of possession. Strikers (red) show the opposite trend with greater importance as receivers suggesting
+                they act as sinks for passing moves. Defenders (blue) tended to be of high importance to both networks
+                which suggests they are heavily involved in passing moves in intermediary stages. Midfielders (orange)
+                can be seen to vary in profile with some showing a correlation similar to strikers whilst others are within
+                the defenders cluster. This suggests more complexity within the midfield class, with some midfielders
+                performing a different role in a team's passing than others. However, the average in and out pass
+                eigenvector centrality are highly correlated, the intuition for this is that it is highly likely when a player
+                receives a pass, they continue the possession and give another pass regardless of position.
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Next we considered the importance of players as passers and receivers to the xT networks, again taking the average across all games
+                players participated in.
+                These results shows weaker correlation between players contribution when considering positive xT contribution than when
+                solely considering pass count. In addition the grouping of positions among the outfield roles is much
+                sparser. Considering expected threat, greater distinction can be made between players suggesting more variety in the role players 
+                take up in the attacking phase of play. Midfielders particularly show a wide spread with some being important for receiving high-xT
+                passes and others important as attacking passers.
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="xt-ec" class="text-img-div">
+            <img src="../img/_in_out_xT_ec.png" alt="scatter plot">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                To further investigate the difference in pass network and xT network importance, the importance as a passer or receiver in both networks was
+                directly compared. An EC difference metric is proposed as the difference between xT network EC and pass network EC. A more positive value in this metric
+                indicates more importance to in attacking phases. The importance of midfielders as receivers in the network can be seen below. 
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="mid-in-ec" class="text-img-div">
+            <img src="../img/midfielder_in_pass_xT_ec.png" alt="web network">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                As previously discussed, midfielder is a broad classification which describes a wider range of
+                roles than other positions. The receiver importance plot shows examples at both extremes
+                of EC difference with some midfielders important for receiving large numbers of non-threatening passes 
+                whilst others are important for receiving aggressive attacking passes. The results indicate it is difficult 
+                to be important for receiving many passes and receiving dangerous passes.
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="mid-out-ec" class="text-img-div">
+            <img src="../img/midfielder_out_pass_xT_ec.png" alt="web network">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                The passer importance plot shows more correlation; those who are important for making many passes tend to be important for making dangerous passes.
+                It is interesting to note the cluster of players important for receiving many safe passes (Toni Kroos, Frenkie De Jong, William Carvalho) are also
+                important for making many dangerous passes. In this way, we can start to define player profile, this cluster has a profile which may be described as
+                a deep-lying high-volume progessive passer just by considering the two scatter plots.
+            </p>
+        </div>
+    </div>
+
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Conclusions and Future Work</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                As an extension to the application of network science in football, it can be seen that considering the
+                positive xT contributions as edge weights gives insight beyond the pass count. xT allows for a more
+                nuanced understanding of the importance of a player within their team and their role within the network
+                particularly in attacking phases, and expands upon the discrete classification that position labels provide.
+                This type of player profiling has potential applications in recruitment and tactical deployment in games.
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                This project focused on the use of network measures for analysis of individual players, however, the nature
+                of network science means that behaviour is captured within a complex system and the results can not be
+                considered to be a global measure of an individual's performance or ability. To what extent the findings
+                are due to the team around a player, or the task assigned to them by a coach, is unknown. They could
+                give an indication a player is able to perform a similar role in a similar setup but not a guarantee. 
+                In this way, network measures may be used to understand some of the complexity in football performance and applied as tools for
+                player profiling and performance analysis. 
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Future work could see further extensions to the principles applied here, with more networks and more network comparisons yielding
+                more detail into team structure and player role. For example, using tracking data, we may begin to consider pressing networks where 
+                we look at teams structure when pressing by considering the distance between teammates when out-of-possession as links in a dynamic network.
+                We may also consider the proximity of players to their opponents as links to understand how efficiently space is controlled by the pressing team.  
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p style="font-weight: bold; text-align: center;">
+                Thank you for reading, please check out some of my other projects.
+            </p>        
         </div>
     </div>
