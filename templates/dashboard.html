@@ -1,0 +1,206 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Match Dashboard</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+    <!-- The sidebar -->
+    <div class="sidebar">
+        <a href="../index.html">About</a>
+        <div class="sect-header">
+            <h3>Projects</h3>
+        </div>
+        <a href="elo.html">xG ELO<N/a>
+        <a href="networks.html">xT Pass Networks</a>
+        <a class="active" href="dashboard.html">StatsBomb Dashboard</a>
+        <a href="clustering.html">Recruitment Clustering</a>
+        <div id="contact-div" class="sect-header">
+            <h3>Contact</h3>
+            <a class="contact" href="https://www.linkedin.com/in/joe-mcmullen-a77a6913b/">LinkedIn</a>
+            <a class="contact" href="https://www.github.com/Joe-McMullen">Github</a>
+        </div>
+    </div>
+
+    <!-- Content-->
+    <div class="title-container">
+        <h1>Match Dashboard Generator from StatsBomb Event Data</h1>
+    </div>
+    <div class="subtitle-container">
+        <div class="subtitle-div">
+            <h2>Automated event data processing and visualisation to produce a match overview</h2>
+        </div>
+    </div>
+    <div class="stack-container">
+        <div class="stack-div">
+            <h3>Stack: Python (statsbombpy, mplsoccer), Streamlit</h3>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                This project aims to create a web application which takes a StatsBomb match code as input and returns a 
+                match report visualising the key insights from the game with event data from StatsBomb's python api. See the examples below from the 2024 AFCON final between Nigeria and Ivory Coast.
+            </p>
+        </div>
+    </div>
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Expected Goals(xG) Timeline</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                xG is a statistical (or machine learning) model to determine the likelihood that a shot results in a goal (from the moment before the shot is taken). This is used to quantify
+                the quality of chances that each team creates in a given game. From the xG timeline, we can gain insight into which team created better chances over the course of the game,
+                whilst also beginning to understand the gamestate in different phases. It is important to consider gamestate when looking at xG to give more context to the findings. For example,
+                if a team goes ahead early from a low quality chance (as with Nigeria below) they may choose to defend this lead and play defensively resulting in a low xG despite being ahead for a large portion of the game.
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="xg" class="text-img-div">
+            <img src="../img/xG.png" alt="time-series data">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Momentum Timeline</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Shots are still sparse events within the context of football, one team may get into many threatening positions but not take many threatening shots. To consider this, we can consider
+                the Expected Threat(xT) that each team creates. xT is a statistical model which attributes a value to on-ball actions based on the change in likelihood of scoring within the possession
+                at the start and end point of the action (For more detail and the implementation of an xT model, please see my <a href="networks.html">project on pass networks with xT</a>).
+                In the momentum graph, for each minute, we consider the cumulative xT of the events of each team and plot the difference between the two. This gives insight into which team has created 
+                more threatening positions over the match. We may also begin to build up some ideas as to how a team plays, with short tall peaks indicating counter attacks and wider peaks indicative of 
+                a more controlling playstyle. 
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="momentum" class="text-img-div">
+            <img src="../img/momentum.PNG" alt="time-series data">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Pass Networks</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Pass networks gives us an idea into the structure and passing patterns of a team when in possession. Node location in the network shows a player's average position when passing 
+                and node size encodes the total number of passes a player originates. In the pass networks in this project, edges are weighted with the count of passes from one player to another (for 
+                other edge-weight examples please see my <a href="networks.html">project on pass networks with xT</a>). Thicker edges indicate more passes between players. Through pass networks, we can 
+                gain more information about team playstyle. For example, we can see that on average, Nigeria were very deep (which reflects the lower xG and less area on the momentum timeline) and Osimhen
+                was isolated up front. Ivory Coast were more attacking, choosing to favour Adingra on the left side of the pitch as an outlet for build up play. Pass networks are directed, therefore future improvements
+                will attempt to make it clearer in which way the edge is travelling between nodes.  
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="nigeria-network" class="text-img-div">
+            <img src="../img/nigeria_network.png" alt="network">
+            <p class="matrix-note"></p>
+        </div>
+        <div id="ivc-network" class="text-img-div">
+            <img src="../img/ivory_network.png" alt="network">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Shot Maps</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Shot maps compliment the xG timeline and provide a more graphical representation of chance creation over a match. Node size encodes the xG of each shot and filled nodes indicate
+                where goals were scored from. At a glance, they show who had more chances and the quality and distribtion of those chances. 
+                The examples below represent simple shot maps, but more detail may be added in the future to show the type of shot (eg. header, volley, left-foot, first-time strike), position of other players (using 
+                statsbomb 360 data), and the build up to a shot (eg. cross, pass-chain).   
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="nigeria-shot" class="text-img-div">
+            <img src="../img/nigeria_shot.png" alt="scatter plot">
+            <p class="matrix-note"></p>
+        </div>
+        <div id="ivc-shot" class="text-img-div">
+            <img src="../img/ivory_shot.png" alt="scatter plot">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Entries into Final Third</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Assuming that most passes take place during the build-up phase, pass count networks do not give us much information about attacking phases. One way to try to understand attacking patterns 
+                of a team is to look at their entries into the final third. Repeated patterns in the figures show attacking trends. For example, Ivory coast repeatedly move the ball to the same wide areas and 
+                made crosses into the box or looked to carry the ball into a threatening position near the goal line. Many of Nigeria's entries into the final third come from deeper suggesting they sat deep and looked to counter with long through balls.
+                In the future, making the layers of this figure interactive and changing the colours will make it easier to extract insight.  
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="nigeria-passes" class="text-img-div">
+            <img src="../img/nigeria_pass.png" alt="comet plot">
+            <p class="matrix-note"></p>
+        </div>
+        <div id="ivc-passes" class="text-img-div">
+            <img src="../img/ivory_coast_pass.png" alt="comet plot">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Future Work</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Overall, this project is able to take a StatsBomb match code and read the event data for a game through StatsBomb's python api.
+                The data is processed and the resulting dashboard is able to provide visualisations highlighting key insights such as chance creation, in-possession structure and attacking trends. 
+                Currently this project is deployed using Streamlit.
+            </p>
+            <p>
+                Future work will aim to improve the existing visualisations as detailed above as well as adding more graphs to provide further insight, this may include:,  
+            </p>
+            <ul>
+                <li>On-ball player performance using xT</li>
+                <li>Gamestate analysis</li>
+                <li>Set-piece analysis</li>
+                <li>Defensive metrics</li>
+            </ul>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p style="font-weight: bold; text-align: center;">
+                Thank you for reading, please check out some of my other projects.
+            </p>        
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+        </div>
+    </div>

@@ -270,6 +270,13 @@ body p {
 .text-img-container #guardiola-network {
   max-width: 500px;
 }
+.text-img-container #xg, .text-img-container #momentum {
+  max-width: 700px;
+}
+.text-img-container #nigeria-network, .text-img-container #ivc-network, .text-img-container #nigeria-shot, .text-img-container #ivc-shot, .text-img-container #nigeria-passes, .text-img-container #ivc-passes {
+  max-width: 600px;
+  min-width: 360px;
+}
 
 .text-container {
   display: flex;
