@@ -44,8 +44,8 @@
     <div class="text-container">
         <div class="text-div">
             <p>
-                This project aims to create a web application which takes a StatsBomb match code as input and returns a 
-                match report visualising the key insights from the game with event data from StatsBomb's python api. See the examples below from the 2024 AFCON final between Nigeria and Ivory Coast.
+                This project aims to create a web application which takes a StatsBomb match code as input, reads and processes event data from StatsBomb's python api, and returns a 
+                match report visualising the key insights from the game. See the examples below from the 2024 AFCON final between Nigeria and Ivory Coast.
             </p>
         </div>
     </div>
@@ -59,7 +59,7 @@
             <p>
                 xG is a statistical (or machine learning) model to determine the likelihood that a shot results in a goal (from the moment before the shot is taken). This is used to quantify
                 the quality of chances that each team creates in a given game. From the xG timeline, we can gain insight into which team created better chances over the course of the game,
-                whilst also beginning to understand the gamestate in different phases. It is important to consider gamestate when looking at xG to give more context to the findings. For example,
+                and see how each team performed in different gamestates. It is important to consider gamestate when looking at xG to give more context to the findings. For example,
                 if a team goes ahead early from a low quality chance (as with Nigeria below) they may choose to defend this lead and play defensively resulting in a low xG despite being ahead for a large portion of the game.
             </p>
         </div>
@@ -78,11 +78,11 @@
     <div class="text-container">
         <div class="text-div">
             <p>
-                Shots are still sparse events within the context of football, one team may get into many threatening positions but not take many threatening shots. To consider this, we can consider
-                the Expected Threat(xT) that each team creates. xT is a statistical model which attributes a value to on-ball actions based on the change in likelihood of scoring within the possession
-                at the start and end point of the action (For more detail and the implementation of an xT model, please see my <a href="networks.html">project on pass networks with xT</a>).
+                Shots are still sparse events within the context of football, one team may get into many threatening positions but not produce many high-quality shots. To account for this, we can consider
+                the Expected Threat(xT) that each team creates. xT is a statistical model which attributes a value to on-ball actions based on the change in likelihood of scoring within the possession (For more detail and the implementation of an xT model, please see my <a href="networks.html">project on pass networks with xT</a>).
                 In the momentum graph, for each minute, we consider the cumulative xT of the events of each team and plot the difference between the two. This gives insight into which team has created 
-                more threatening positions over the match. We may also begin to build up some ideas as to how a team plays, with short tall peaks indicating counter attacks and wider peaks indicative of 
+                more threatening positions over the match. For example, we can see that Nigeria had few threatening attacks up until the 35th minute where they scored against the run of play. 
+                We may also begin to build up some ideas as to how a team plays, with short tall peaks indicating counter attacks and wider peaks indicative of 
                 a more controlling playstyle. 
             </p>
         </div>
@@ -101,10 +101,10 @@
     <div class="text-container">
         <div class="text-div">
             <p>
-                Pass networks gives us an idea into the structure and passing patterns of a team when in possession. Node location in the network shows a player's average position when passing 
+                Pass networks give us an idea into the structure and passing patterns of a team when in possession. Node location in the network shows a player's average position when passing 
                 and node size encodes the total number of passes a player originates. In the pass networks in this project, edges are weighted with the count of passes from one player to another (for 
-                other edge-weight examples please see my <a href="networks.html">project on pass networks with xT</a>). Thicker edges indicate more passes between players. Through pass networks, we can 
-                gain more information about team playstyle. For example, we can see that on average, Nigeria were very deep (which reflects the lower xG and less area on the momentum timeline) and Osimhen
+                other network examples, please see my <a href="networks.html">project on pass networks with xT</a>). Thicker edges indicate more passes between players. Through pass networks, we can 
+                gain more information about team playstyle. For example, we can see that on average, Nigeria were very deep (which reflects the lower xG and less area on the momentum timeline), made fewer passes than their opponents and Osimhen
                 was isolated up front. Ivory Coast were more attacking, choosing to favour Adingra on the left side of the pitch as an outlet for build up play. Pass networks are directed, therefore future improvements
                 will attempt to make it clearer in which way the edge is travelling between nodes.  
             </p>
@@ -204,3 +204,4 @@
         <div class="text-div">
         </div>
     </div>
+</body>

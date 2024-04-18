@@ -215,6 +215,7 @@ body {
   padding-top: 60px;
   padding-bottom: 0px;
   margin-left: 200px;
+  gap: 20px;
   .text-img-div {
     flex: 0.8;
     text-align: center;
@@ -237,6 +238,13 @@ body {
       text-align: center;
       margin-top: 0px;
     }
+  }
+  .group-note{
+    font-style: italic;
+    font-size: 12;
+    text-align: center;
+    margin-top: 0px;
+    padding: 0px;
   }
   #season-xt {
     max-width: 800px;
@@ -268,6 +276,25 @@ body {
   #nigeria-network, #ivc-network, #nigeria-shot, #ivc-shot, #nigeria-passes, #ivc-passes {
     max-width: 600px;
     min-width: 360px;
+  }
+  #kevin {
+    max-width: 1000px;
+  }
+  #t-sne {
+    max-width: 500px;
+  }
+  #lin-reg {
+    max-width: 600px;
+  }
+  #profile-1, #profile-2, #profile-3 {
+    max-width: 300px;
+    padding-bottom: 0px;
+  }
+  #radar-1, #radar-2 {
+    max-width: 600px;
+  }
+  #demo {
+    max-width: 700px;
   }
 }
 

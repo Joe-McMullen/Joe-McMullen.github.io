@@ -1,0 +1,232 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Recruitment Clustering</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+    <!-- The sidebar -->
+    <div class="sidebar">
+        <a href="../index.html">About</a>
+        <div class="sect-header">
+            <h3>Projects</h3>
+        </div>
+        <a href="elo.html">xG ELO<N/a>
+        <a href="networks.html">xT Pass Networks</a>
+        <a href="dashboard.html">StatsBomb Dashboard</a>
+        <a class="active" href="clustering.html">Recruitment Clustering</a>
+        <div id="contact-div" class="sect-header">
+            <h3>Contact</h3>
+            <a class="contact" href="https://www.linkedin.com/in/joe-mcmullen-a77a6913b/">LinkedIn</a>
+            <a class="contact" href="https://www.github.com/Joe-McMullen">Github</a>
+        </div>
+    </div>
+
+    <!-- Content-->
+    <div class="title-container">
+        <h1>Identify Similar Players using Clustering for Recruitment</h1>
+    </div>
+    <div class="subtitle-container">
+        <div class="subtitle-div">
+            <h2>Clustering and valuing players and Using Data from Football Manager and Transfermarkt</h2>
+        </div>
+    </div>
+    <div class="stack-container">
+        <div class="stack-div">
+            <h3>Stack: Python, Tableau</h3>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                This project aims to use data from Football Manager 2023 to group players with a similar profile. The project also aims to use data from
+                Transfermarkt to create a player valuation model based on their attributes. These will be combined into an application which can take a player as input and 
+                produchort-list of similar playere a ss with their profile, including a valuation. This may be useful for recruitment departments
+                who want to maximise the resources of their scouting departments by using data to identify relevant transfer targets for further analysis.  
+            </p>
+        </div>
+    </div>
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Data</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Football Manager breaks player attributes down into 3 categories (technical, mental, physical) and these are further seperated into 
+                36 attributes as seen below. These attributes are based on real world performance and provide a broad overview of the qualities of a player.
+                Player attributes as well as meta data was scraped for 1045 players from <a href="https://fminside.net">FMInside</a>
+                using BeautifulSoup and selenium within python.
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="kevin" class="text-img-div">
+            <img src="../img/kevin.PNG" alt="player profile">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                <a href="https://fminside.ne">Transfermarkt</a> is a website which provides player values based on community opinion. This provides valuations which 
+                take into account many factors beyond those captured in football metrics including marketing value and injury susceptibility.
+                The dataset used 
+                in this project was downloaded from <a href="https://www.kaggle.com/datasets/davidcariboo/player-scores">kaggle</a> and is regularly updated. 
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="kevin-value" class="text-img-div">
+            <img src="../img/kevin_value.PNG" alt="player profile">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Modelling</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                In this project, player similarity was determined using K-means clustering on the 36 attributes in the Football Manager dataset
+                shown above. Within Football Manager, goalkeepers have a different set of attributes to outfield players, as a result, 
+                they were excluded from the dataset. 
+                This optimum clustering was observed with 18 different player profiles considering the inertia and silhouette coefficient
+                for differing numbers of clusters.  
+                The below visualisation of this clustering was produced using the t-SNE algorithm for dimensionality
+                reduction.    
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="t-sne" class="text-img-div">
+            <img src="../img/clustering.png" alt="scatter plot">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                The datasets containing player attribrutes and values were combined to find patterns between the attributes and valuations.
+                A linear regression model was fit to estimate player value. The key features with the most influence on value 
+                were found to be be age, stamina, pace, and acceleration. This suggests a premium for young, and 
+                athletically promising players which might be expected given they will be considered to have high potential value in the future.
+                Below is a plot showing player value obtained from the model against the sum of player attributes.    
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="lin-reg" class="text-img-div">
+            <img src="../img/lin-reg.PNG" alt="scatter plot">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Results and Demo</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                An example of the insights gained from the modelling can be seen below with the majority of full-backs split into 3 different groups. 
+                Considering the average attributes of each cluster we can build up a different profile for each group. 
+                For example, consider the technical and mental attributes of the clusters.
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="radar-1" class="text-img-div">
+            <img src="../img/radar1.PNG" alt="radar plot">
+            <p class="matrix-note"></p>
+        </div>
+        <div id="radar-2" class="text-img-div">
+            <img src="../img/radar2.PNG" alt="radar plot">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div style="padding-top: 0px;" class="text-img-container">
+        <div class="text-img-div">
+            <p class="group-note">Average technical(first) and mental(second) attributes of the clusters containing majority of full-backs</p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="profile-1" class="text-img-div">
+            <img src="../img/profile1.PNG" alt="player description">
+            <p class="matrix-note"></p>
+        </div>
+        <div id="profile-2" class="text-img-div">
+            <img src="../img/profile2.PNG" alt="player description">
+            <p class="matrix-note"></p>
+        </div>
+        <div id="profile-3" class="text-img-div">
+            <img src="../img/profile3.PNG" alt="player description">
+        </div>
+    </div>
+    <div style="padding-top: 0px;" class="text-img-container">
+        <div class="text-img-div">
+            <p class="group-note">Key attributes and notable player from each full-back cluster</p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                These models were combined to create a demo in Tableau which for a selected player (Kevin De Bruyne in this case), the 10 most similar
+                players were identified and information and their comparisons are displayed to the user. Recruiting departments could use this application 
+                to identify player replacements or alternative options once a transfer target is determined. This could aid in reducing time spent scouting 
+                unsuitable players, helping to increase efficiency of the recruiting department.
+            </p>
+        </div>
+    </div>
+    <div class="text-img-container">
+        <div id="demo" class="text-img-div">
+            <img src="../img/demo.gif" alt="application demo">
+            <p class="matrix-note"></p>
+        </div>
+    </div>
+    <div class="text-heading-container">
+        <div class="text-heading-div">
+            <h2>Improvements and Future Work</h2>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p>
+                Whilst Football Manager attributes are based on real world data, improvements to this project could be made by directly building up
+                metrics from real world event and tracking data. This will allow for more bespoke metric selection which may be useful in targetting 
+                specific profiles. Improvements could also be made in the data processing, with normalisation being used to ensure clustering focussed on 
+                players with a similar overall profile are grouped rather than a similar quality level. Post-processing such as weightings based on a players proximity 
+                to cluster centres may also give more explainable output regarding the profile of a player. 
+            </p>
+            <p>
+                The use of different clustering algorithms or classifiers for value estimation should also be investigated as well as the inclusion of 
+                more parameters. For example, player information such as nationality or league may be relevant to value modelling.  
+            </p>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+            <p style="font-weight: bold; text-align: center;">
+                Thank you for reading, please check out some of my other projects.
+            </p>        
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text-div">
+        </div>
+    </div>
+</body>

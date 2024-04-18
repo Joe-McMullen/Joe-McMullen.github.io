@@ -222,6 +222,7 @@ body p {
   padding-top: 60px;
   padding-bottom: 0px;
   margin-left: 200px;
+  gap: 20px;
 }
 .text-img-container .text-img-div {
   flex: 0.8;
@@ -245,6 +246,13 @@ body p {
   font-size: 12;
   text-align: center;
   margin-top: 0px;
+}
+.text-img-container .group-note {
+  font-style: italic;
+  font-size: 12;
+  text-align: center;
+  margin-top: 0px;
+  padding: 0px;
 }
 .text-img-container #season-xt {
   max-width: 800px;
@@ -276,6 +284,25 @@ body p {
 .text-img-container #nigeria-network, .text-img-container #ivc-network, .text-img-container #nigeria-shot, .text-img-container #ivc-shot, .text-img-container #nigeria-passes, .text-img-container #ivc-passes {
   max-width: 600px;
   min-width: 360px;
+}
+.text-img-container #kevin {
+  max-width: 1000px;
+}
+.text-img-container #t-sne {
+  max-width: 500px;
+}
+.text-img-container #lin-reg {
+  max-width: 600px;
+}
+.text-img-container #profile-1, .text-img-container #profile-2, .text-img-container #profile-3 {
+  max-width: 300px;
+  padding-bottom: 0px;
+}
+.text-img-container #radar-1, .text-img-container #radar-2 {
+  max-width: 600px;
+}
+.text-img-container #demo {
+  max-width: 700px;
 }
 
 .text-container {
